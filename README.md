@@ -1,5 +1,7 @@
 # Sequelize Pagination
 
+Sequelize model decorator which provides pagination queries.
+
 the project is inspired by [sequelize-cursor-pagination](https://www.npmjs.com/package/sequelize-cursor-pagination)
 
 ## Quick start
