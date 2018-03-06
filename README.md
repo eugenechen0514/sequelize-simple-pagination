@@ -1,8 +1,8 @@
-# Sequelize Pagination
+# Sequelize Simple Pagination
 
-Sequelize model decorator which provides pagination queries.
+Add a method on a sequelize model for pagination queries
 
-the project is inspired by [sequelize-cursor-pagination](https://www.npmjs.com/package/sequelize-cursor-pagination)
+The project is inspired by [sequelize-cursor-pagination](https://www.npmjs.com/package/sequelize-cursor-pagination)
 
 ## Quick start
 
