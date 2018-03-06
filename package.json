@@ -4,13 +4,17 @@
   },
   "name": "sequelize-pagination",
   "description": "Sequelize model decorator which provides pagination queries",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./index.js",
   "keywords": [
     "sequelize",
     "pagination"
   ],
   "author": "Eugene",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eugenechen0514/sequelize-pagination.git"
+  },
   "dependencies": {
     "lodash": "^4.17.5"
   },
