@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/eugenechen0514/sequelize-simple-pagination.svg?branch=master)](https://travis-ci.org/eugenechen0514/sequelize-simple-pagination)
+
 # Sequelize Simple Pagination
 
 Add a method on a sequelize model for pagination queries
