@@ -1,4 +1,5 @@
 node_modules
 __tests__/db.sqlite
+example/db.sqlite
 .idea
 .DS_Store

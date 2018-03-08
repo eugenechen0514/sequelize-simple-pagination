@@ -40,11 +40,38 @@ Counter.paginate({
 })
 ```
 
-The ``paginate`` method returns a promise with resolve data of `SequelizePaginationResult` type.
+The `paginate` method returns a promise with resolve data of `SequelizePaginationResult` type.
 
 
-## Common usage
-Coming soon...
+## Use examples
+
+### Predefine pagination
+
+```javascript
+withPagination({
+    pageSize: 3,                            // Fix page size
+})(Counter);
+```
+
+[example/PredefinePagination.js](example/PredefinePagination.js)
+
+
+### Custom pagination
+
+Create a pagination with orderBy, order options
+
+```javascript
+async function paginateCounter(options) {
+    const {orderBy, order, ...others} = options;
+    const result = await Counter.paginate({
+        orders: [[orderBy, order]],
+        ...others,
+    });
+    return {orderBy, order, ...result};
+}
+```
+
+[example/CustomPagination-OrderBy.js](example/CustomPagination-OrderBy.js)
 
 
 ## API
@@ -79,7 +106,7 @@ return a promise with resolve data of `SequelizePaginationResult` type.
 
 ### SequelizePaginationResult - pagination resolve data
 
-`SequelizePaginationResult` is object with following properies:
+`SequelizePaginationResult` is a object type with following properties:
 * **entities** the results of the query
 * **pageIndex** page index
 * **pageCount** page count(total page amount)
