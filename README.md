@@ -12,7 +12,7 @@ Define a sequelize model and add a pagination method:
 
 ```javascript
 // Define a model
-const withPagination = require(sequelize-pagination);
+const withPagination = require('sequelize-simple-pagination');
 
 const Counter = sequelize.define('counter', {
   id: { type:  Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
