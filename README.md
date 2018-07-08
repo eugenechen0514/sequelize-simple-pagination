@@ -45,7 +45,7 @@ The `paginate` method returns a promise with resolve data of `SequelizePaginatio
 
 ## Use examples
 
-### Predefine pagination
+### Predefine pagination configuration
 
 ```javascript
 withPagination({
@@ -73,40 +73,71 @@ async function paginateCounter(options) {
 
 [example/CustomPagination-OrderBy.js](example/CustomPagination-OrderBy.js)
 
+### Pagination hook
+
+Alter the resolve data after pagination completion by the hook `afterPaginationFunction()`
+
+```javascript
+const {withPaginationHook} = require('sequelize-simple-pagination/util');
+
+withPaginationHook({
+    afterPaginationFunction: (data) => {
+        // Alter data ...
+        data.queriedDate = new Date();
+        return data;
+    }
+})(Counter);
+
+Counter.paginate()
+    .then(data => {
+        console.log(`Pagination completion: ${data.queriedDate}`)
+    })
+```
+
+[example/CustomPagination-OrderBy.js](example/CustomOutput.js)
+
 
 ## API
 
-### withPagination(options) -  for adding pagination method
-`withPagination()` is a function generator for remember pagination configuration.
+### Module: **sequelize-simple-pagination**
+#### withPagination(options) -  for adding pagination method
+`withPagination()` decorates sequelize models by a pagination function (default: paginate()).
 
-`options` is a object with following properties: 
+`options` is an object with following properties:
 * **methodName**: the name of the pagination method. Default: `paginate`
 * **primaryKey**: the primary key field of the model. Default: `id`
 * **oneBaseIndex**: page index base. Pag index starts from 0 if `oneBaseIndex` is `false`. Page index starts from 1 if `oneBaseIndex` is `true`. Default: `false`
 * **pageSize**: Default: 1
-* **where**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and pass value directly to [where](http://docs.sequelizejs.com/manual/tutorial/querying.html#where)
-* **array**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and add a primary key to [order](http://docs.sequelizejs.com/manual/tutorial/querying.html#ordering)
-* **attributes**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and pass value directly to [attributes](http://docs.sequelizejs.com/manual/tutorial/querying.html#attributes)
-* **include**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and pass value directly to [include](http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations)
+* **where**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and passes value directly to [where](http://docs.sequelizejs.com/manual/tutorial/querying.html#where)
+* **orders**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and adds a primary key to [order](http://docs.sequelizejs.com/manual/tutorial/querying.html#ordering)
+* **attributes**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and passes value directly to [attributes](http://docs.sequelizejs.com/manual/tutorial/querying.html#attributes)
+* **include**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and passes value directly to [include](http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations)
 
 
-### paginate(options) - execute a pagination query (suppose `options.methodName` is `paginate`)
+### Module: **sequelize-simple-pagination/util**
+#### withPaginationHook({paginateMethod, afterPaginationFunction}) - hook functions
 
-`options` is a object with following properties: 
+* **paginateMethod**:  pagination method. Default: paginate
+* **afterPaginationFunction**: Alter the resolve data after pagination completion
+
+### Pagination query
+#### paginate(options) - execute a pagination query (suppose `options.methodName` is `paginate`)
+
+`options` is an object with following properties:
 * **primaryDesc**: primary key desc order. Default: false
 * **pageSize**: Default: 1
 * **pageIndex**: Pag index starts from 0 if oneBaseIndex is `false`. Page index starts from 1 if oneBaseIndex is`true`.
-* **where**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and pass value directly to [where](http://docs.sequelizejs.com/manual/tutorial/querying.html#where)
-* **array**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and add a primary key to [order](http://docs.sequelizejs.com/manual/tutorial/querying.html#ordering)
-* **attributes**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and pass value directly to [attributes](http://docs.sequelizejs.com/manual/tutorial/querying.html#attributes)
-* **include**: the query applied to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and pass value directly to [include](http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations)
+* **where**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and passes value directly to [where](http://docs.sequelizejs.com/manual/tutorial/querying.html#where)
+* **orders**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and adds a primary key to [order](http://docs.sequelizejs.com/manual/tutorial/querying.html#ordering)
+* **attributes**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and passes value directly to [attributes](http://docs.sequelizejs.com/manual/tutorial/querying.html#attributes)
+* **include**: the query applies to [findAll](http://docs.sequelizejs.com/manual/tutorial/models-usage.html#-findall-search-for-multiple-elements-in-the-database) and passes value directly to [include](http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations)
 
 return a promise with resolve data of `SequelizePaginationResult` type.
 
+### Type
+#### SequelizePaginationResult - pagination resolve data
 
-### SequelizePaginationResult - pagination resolve data
-
-`SequelizePaginationResult` is a object type with following properties:
+`SequelizePaginationResult` is an object type with following properties:
 * **entities** the results of the query
 * **pageIndex** page index
 * **pageCount** page count(total page amount)
@@ -116,7 +147,6 @@ return a promise with resolve data of `SequelizePaginationResult` type.
 * **orders** the `orders` parameter of `findAll`
 * **attributes** the `attributes` parameter of `findAll`
 * **include** the `include` parameter of `findAll`
-
 
 ## Run tests
 
