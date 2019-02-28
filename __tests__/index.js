@@ -146,3 +146,5 @@ test('paginates with base zero correctly', async () => {
     pagination.should.have.property('pageIndex').with.eql(3);
     pagination.entities[0].should.property('id', 5);
 });
+
+//TODO: Implement test cases to cover the `humanizeWhere` method behavior
