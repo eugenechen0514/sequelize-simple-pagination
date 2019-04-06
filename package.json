@@ -4,7 +4,7 @@
   },
   "name": "sequelize-simple-pagination",
   "description": "Add a method on a sequelize model for pagination queries",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "./index.js",
   "keywords": [
     "sequelize",
@@ -20,8 +20,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "jest": "^24.1.0",
-    "sequelize": "^5.0.0-beta.16",
+    "jest": "^24.7.1",
+    "sequelize": "^5.2.12",
     "sqlite3": "^4.0.6"
   }
 }
