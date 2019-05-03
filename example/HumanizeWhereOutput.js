@@ -1,3 +1,8 @@
+/********************************************************************
+ *
+ * Contributor: Elbert Castañeda https://github.com/elbertcastaneda
+ *
+ ********************************************************************/
 const path = require('path');
 const assert = require('assert');
 const Sequelize = require('sequelize');
