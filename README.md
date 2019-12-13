@@ -94,7 +94,8 @@ Counter.paginate()
     })
 ```
 
-[example/CustomPagination-OrderBy.js](example/CustomOutput.js)
+* [example/CustomOutput.js](example/CustomOutput.js)
+* [example/HumanizeWhereOutput.js](example/HumanizeWhereOutput.js)
 
 
 ## API
